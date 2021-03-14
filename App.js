@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import LoginPage from "./screens/LoginPage";
+import LoginPage from "./screens/LoginPage.js";
+import RegisterPage from "./screens/RegisterPage";
 
 export default function App() {
   return <LoginPage />;
