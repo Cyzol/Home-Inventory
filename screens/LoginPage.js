@@ -11,7 +11,7 @@ import {
 
 import { styles } from "../assets/styles/LoginPage.style.js";
 
-export default function LoginPage() {
+export default function LoginPage({ navigation }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,12 +42,12 @@ export default function LoginPage() {
 
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={() => console.log(login + " " + password)}
+        onPress={() => navigation.navigate("Menu")}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => console.log("Sign up")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
         <Text style={styles.signUpButton}>Sign Up</Text>
       </TouchableOpacity>
     </View>
