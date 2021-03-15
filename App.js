@@ -9,8 +9,9 @@ import {
 } from "react-native";
 
 import LoginPage from "./screens/LoginPage.js";
+import MainMenuPage from "./screens/MainMenuPage";
 import RegisterPage from "./screens/RegisterPage";
 
 export default function App() {
-  return <LoginPage />;
+  return <MainMenuPage />;
 }
