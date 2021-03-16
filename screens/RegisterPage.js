@@ -7,15 +7,28 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { styles } from "../assets/styles/LoginPage.style.js";
+import { auth } from "../firebase.js";
 import LoginPage from "./LoginPage.js";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const register = () => {
+    auth
+    .createUserWithEmailAndPassword(login, password)
+    .then((authUser) => {
+      authUser.user.updateProfile({
+        displayName: name,
+      });
+    })
+    .catch((error) => alert(error.message));
+  };
 
   return (
     <View style={styles.container}>
@@ -32,7 +45,7 @@ export default function RegisterPage() {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.titles}>Login</Text>
+        <Text style={styles.titles}>E-mail</Text>
         <TextInput
           style={styles.loginInput}
           value={login}
@@ -49,20 +62,10 @@ export default function RegisterPage() {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={() =>
-          console.log(
-            `Name : ${name} \nLogin: ${login} \nPassowrd: ${password}`
-          )
-        }
-      >
+      <TouchableOpacity style={styles.loginButton} onPress={register}>
         <Text style={styles.loginText}>Register</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => console.log("Sign In")}>
-        <Text style={styles.signUpButton}>Sign In</Text>
-      </TouchableOpacity>
     </View>
   );
 }

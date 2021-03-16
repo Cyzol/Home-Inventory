@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,13 +7,31 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  KeyboardAvoidingView
 } from "react-native";
 
 import { styles } from "../assets/styles/LoginPage.style.js";
+import { auth } from "../firebase.js";
 
 export default function LoginPage({ navigation }) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if(authUser) {
+        navigation.replace("Menu");
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(login,password)
+    .catch(error => alert(error));
+  }
 
   return (
     <View style={styles.container}>
@@ -42,7 +60,7 @@ export default function LoginPage({ navigation }) {
 
       <TouchableOpacity
         style={styles.loginButton}
-        onPress={() => navigation.navigate("Menu")}
+        onPress={signIn}
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
