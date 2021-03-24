@@ -22,6 +22,7 @@ export default function MainMenuPage({ navigation }) {
     navigation.replace("Login");
   };
 
+
   return (
     <View style={styles.container}>
       <View style={styles.userNameSection}>
@@ -30,15 +31,14 @@ export default function MainMenuPage({ navigation }) {
       <View style={styles.imageSection}>
         <Image source={require("../assets/icons/mainMenuPage.png")} />
       </View>
-
       <View style={styles.buttonSection}>
         <TouchableOpacity style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Generate Qr</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.mainMenuButton}>
+        <TouchableOpacity onPress={()=>navigation.replace("BoxPage")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>See all items</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.mainMenuButton}>
+        <TouchableOpacity onPress={()=>navigation.replace("AddBox")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.mainMenuButton}>

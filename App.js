@@ -14,6 +14,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./screens/LoginPage.js";
 import MainMenuPage from "./screens/MainMenuPage";
 import RegisterPage from "./screens/RegisterPage";
+import BoxPage from "./screens/BoxPage";
+import AddBox from "./screens/AddBox.js";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +26,8 @@ export default function App() {
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="Register" component={RegisterPage} />
         <Stack.Screen name="Menu" component={MainMenuPage} />
+        <Stack.Screen name="BoxPage" component={BoxPage} />
+        <Stack.Screen name="AddBox" component={AddBox} />
       </Stack.Navigator>
     </NavigationContainer>
   );
