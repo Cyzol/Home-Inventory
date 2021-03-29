@@ -14,6 +14,7 @@ import { styles } from "../assets/styles/LoginPage.style.js";
 import { auth } from "../firebase.js";
 import LoginPage from "./LoginPage.js";
 
+
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [login, setLogin] = useState("");

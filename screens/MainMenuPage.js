@@ -35,10 +35,10 @@ export default function MainMenuPage({ navigation }) {
         <TouchableOpacity style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Generate Qr</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.replace("BoxPage")} style={styles.mainMenuButton}>
+        <TouchableOpacity onPress={()=>navigation.navigate("BoxPage")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>See all items</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.replace("AddBox")} style={styles.mainMenuButton}>
+        <TouchableOpacity onPress={()=>navigation.navigate("AddBox")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.mainMenuButton}>

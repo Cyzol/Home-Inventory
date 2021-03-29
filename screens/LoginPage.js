@@ -7,7 +7,7 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { styles } from "../assets/styles/LoginPage.style.js";
@@ -19,7 +19,7 @@ export default function LoginPage({ navigation }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if(authUser) {
+      if (authUser) {
         navigation.replace("Menu");
       }
     });
@@ -27,11 +27,11 @@ export default function LoginPage({ navigation }) {
     return unsubscribe;
   }, []);
 
-
   const signIn = () => {
-    auth.signInWithEmailAndPassword(login,password)
-    .catch(error => alert(error));
-  }
+    auth
+      .signInWithEmailAndPassword(login, password)
+      .catch((error) => alert(error));
+  };
 
   return (
     <View style={styles.container}>
@@ -58,10 +58,7 @@ export default function LoginPage({ navigation }) {
         />
       </View>
 
-      <TouchableOpacity
-        style={styles.loginButton}
-        onPress={signIn}
-      >
+      <TouchableOpacity style={styles.loginButton} onPress={signIn}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
