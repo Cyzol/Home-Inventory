@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text} from "react-native";
 import PropTypes from 'prop-types';
-import {db} from '../firebase';
+import {db, auth} from '../firebase';
 
 export default function BoxPage() {
 
     const [boxes, setBoxes] = useState([]);
 
-    const ref = db.collection("boxes");
+    const ref = db.collection("users").doc(auth.currentUser.uid).collection('boxes');
 
     const getBoxes = () => {
+        
         ref.onSnapshot((querySnapshot) =>{
             const boxesQuery = [];
             querySnapshot.forEach((doc) =>{
@@ -27,6 +28,7 @@ export default function BoxPage() {
         <View>
             {boxes.map(box => (
                 <Text key={box.place}>
+
                     {box.description}
                 </Text>
             ))}

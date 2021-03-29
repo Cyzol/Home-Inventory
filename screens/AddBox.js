@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import { db } from "../firebase";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { db, auth } from "../firebase";
 import { styles } from "../assets/styles/AddPage.style.js";
 
-const ref = db.collection("boxes");
+const ref = db.collection("users");
 
 export default function AddBox() {
   const [boxes, setBoxes] = useState([]);
@@ -17,8 +12,16 @@ export default function AddBox() {
   const [listItems, setListItems] = useState([]);
   const [listItemInputValue, setlistItemInputValue] = useState("");
 
+  useEffect(() => {
+    setPlace("");
+    setDescription("");
+    setListItems([]);
+  }, [boxes]);
+
   function addSchool(newBox) {
     ref
+      .doc(auth.currentUser.uid)
+      .collection("boxes")
       .doc()
       .set(newBox)
       .then(() => {
@@ -27,9 +30,6 @@ export default function AddBox() {
       .catch((err) => {
         console.error(err);
       });
-    setPlace("");
-    setDescription("");
-    setListItems([]);
   }
 
   const handleListItemsInputChange = (e) => {
