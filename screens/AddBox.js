@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, TouchableOpacity} from "react-native";
-import PropTypes from 'prop-types';
+import {View, Text, TextInput, TouchableOpacity, ScrollView} from "react-native";
 import {db} from '../firebase';
-import { styles } from "../assets/styles/LoginPage.style.js"; 
+import { styles } from "../assets/styles/AddPage.style.js";
 
 export default function AddBox() {
    
@@ -12,8 +11,6 @@ export default function AddBox() {
     const [listItems, setListItems] = useState([]);
     const [listItemInputValue, setlistItemInputValue] = useState('');
 
-
-    const ref = db.collection("boxes");
 
     function addSchool(newBox) {
         ref
@@ -46,32 +43,46 @@ export default function AddBox() {
       }
 
     return(
-        <View>
-            <TextInput
-            style={styles.loginInput} 
-            value={place}
-            onChangeText={(place) => setPlace(place)}>
-            </TextInput>
-            <TextInput
-            style={styles.loginInput} 
-            value={description}
-            onChangeText={(description) => setDescription(description)}>
-            </TextInput>
-            <TextInput
-            style={styles.loginInput} 
-            value={listItemInputValue}
-            onChangeText={(listItemInputValue) => setlistItemInputValue(listItemInputValue)}>
-            </TextInput>
+        <View style={styles.container}>
+            <Text style={styles.headerNewBox}>
+                New Box
+            </Text>
+            <View>
+                <Text style={styles.titles}>Place</Text>
+                <TextInput
+                    style={styles.loginInput}
+                    value={place}
+                    onChangeText={(place) => setPlace(place)}>
+                </TextInput>
+            </View>
+            <View>
+                <Text style={styles.titles}>Description</Text>
+                <TextInput
+                    style={styles.loginInput}
+                    value={description}
+                    onChangeText={(description) => setDescription(description)}>
+                </TextInput>
+            </View>
+            <View>
+                <Text style={styles.titles}>Item</Text>
+                <TextInput
+                    style={styles.loginInput}
+                    value={listItemInputValue}
+                    onChangeText={(listItemInputValue) => setlistItemInputValue(listItemInputValue)}>
+                </TextInput>
+            </View>
             <TouchableOpacity
-                style={styles.loginButton}
+                style={styles.addItemButton}
                 onPress={() => handleAddListItem()}
             >
                 <Text style={styles.loginText}>AddListItem</Text>
             </TouchableOpacity>
             <View>
-                {listItems.map((item,i) => (
-                    <Text onPress={()=>handleDeleteListItem(item)} key={i}>{item}</Text>
-                ))}
+                <View style={styles.listBox}>
+                    {listItems.map((item,i) => (
+                        <Text onPress={()=>handleDeleteListItem(item)} key={i}>{item}</Text>
+                    ))}
+                </View>
             </View>
             <TouchableOpacity
                 style={styles.loginButton}
@@ -80,10 +91,7 @@ export default function AddBox() {
                 <Text style={styles.loginText}>Add</Text>
             </TouchableOpacity>
         </View>
-        // <View><Text>XD</Text></View>
     );
 };
 
-AddBox.propTypes = {
-    
-}   
+ 
