@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./Box.style";
 
 export default function Box({ navigation, box: { description, id, place, listItems }}) {

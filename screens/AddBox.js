@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, TextInput, TouchableOpacity, ScrollView} from "react-native";
-import {db} from '../firebase';
+import {View, Text, TextInput, TouchableOpacity,KeyboardAvoidingView, ScrollView} from "react-native";
+import {auth, db} from '../firebase';
 import { styles } from "../assets/styles/AddPage.style.js";
 
 export default function AddBox() {
@@ -11,7 +11,10 @@ export default function AddBox() {
     const [listItems, setListItems] = useState([]);
     const [listItemInputValue, setlistItemInputValue] = useState('');
 
-    ref = db.collection('boxes');
+    const ref = db
+        .collection("users")
+        .doc(auth.currentUser.uid)
+        .collection("boxes");
 
     useEffect(()=>{
         setPlace("");
@@ -47,54 +50,57 @@ export default function AddBox() {
       }
 
     return(
-        <View style={styles.container}>
-            <Text style={styles.headerNewBox}>
-                New Box
-            </Text>
-            <View>
-                <Text style={styles.titles}>Place</Text>
-                <TextInput
-                    style={styles.loginInput}
-                    value={place}
-                    onChangeText={(place) => setPlace(place)}>
-                </TextInput>
-            </View>
-            <View>
-                <Text style={styles.titles}>Description</Text>
-                <TextInput
-                    style={styles.loginInput}
-                    value={description}
-                    onChangeText={(description) => setDescription(description)}>
-                </TextInput>
-            </View>
-            <View>
-                <Text style={styles.titles}>Item</Text>
-                <TextInput
-                    style={styles.loginInput}
-                    value={listItemInputValue}
-                    onChangeText={(listItemInputValue) => setlistItemInputValue(listItemInputValue)}>
-                </TextInput>
-            </View>
-            <TouchableOpacity
-                style={styles.addItemButton}
-                onPress={() => handleAddListItem()}
-            >
-                <Text style={styles.loginText}>AddListItem</Text>
-            </TouchableOpacity>
-            <View>
-                <View style={styles.listBox}>
-                    {listItems.map((item,i) => (
-                        <Text onPress={()=>handleDeleteListItem(item)} key={i}>{item}</Text>
-                    ))}
+            <ScrollView contentContainerStyle={styles.container} style={styles.scrollView}>
+                <Text style={styles.headerNewBox}>
+                    New Box
+                </Text>
+                <View>
+                    <Text style={styles.titles}>Place</Text>
+                    <TextInput
+                        style={styles.loginInput}
+                        value={place}
+                        onChangeText={(place) => setPlace(place)}>
+                    </TextInput>
                 </View>
-            </View>
-            <TouchableOpacity
-                style={styles.loginButton}
-                onPress={()=> addSchool({place,description,listItems})}
-            >
-                <Text style={styles.loginText}>Add</Text>
-            </TouchableOpacity>
-        </View>
+                <View>
+                    <Text style={styles.titles}>Description</Text>
+                    <TextInput
+                        style={styles.loginInput}
+                        value={description}
+                        onChangeText={(description) => setDescription(description)}>
+                    </TextInput>
+                </View>
+                <View>
+                    <Text style={styles.titles}>Item</Text>
+                    <TextInput
+                        style={styles.loginInput}
+                        value={listItemInputValue}
+                        onChangeText={(listItemInputValue) => setlistItemInputValue(listItemInputValue)}>
+                    </TextInput>
+                </View>
+                <View style={styles.buttons}>
+                    <TouchableOpacity
+                        style={styles.addItemButton}
+                        onPress={() => handleAddListItem()}
+                    >
+                        <Text style={styles.loginText}>AddListItem</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.loginButton}
+                        onPress={()=> addSchool({place,description,listItems})}
+                    >
+                        <Text style={styles.loginText}>Add Box</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                    <View style={styles.listBox}>
+                        {listItems.map((item,i) => (
+                            <Text onPress={()=>handleDeleteListItem(item)} key={i}>{item}</Text>
+                        ))}
+                    </View>
+                </View>
+            </ScrollView>
+
     );
 };
 
