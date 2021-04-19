@@ -1,40 +1,51 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text} from "react-native";
-import PropTypes from 'prop-types';
-import {db} from '../firebase';
+import React, { useState, useEffect } from "react";
+import { View, Text, FlatList } from "react-native";
+import PropTypes from "prop-types";
+import { db, auth } from "../firebase";
+import { styles } from "../assets/styles/BoxPage.style";
+import Box from "../components/Box/Box";
 
-export default function BoxPage() {
+export default function BoxPage({navigation}) {
+  const [boxes, setBoxes] = useState([]);
 
-    const [boxes, setBoxes] = useState([]);
+  const ref = db
+    .collection("users")
+    .doc(auth.currentUser.uid)
+    .collection("boxes");
 
-    const ref = db.collection("boxes");
+  const getBoxes = () => {
+    ref.onSnapshot((querySnapshot) => {
+      const boxesQuery = [];
+      querySnapshot.forEach((doc) => {
+        // console.log(doc.id)
+        boxesQuery.push(Object.assign(doc.data(),{"id": doc.id}));
+      });
+      setBoxes(boxesQuery);
+    });
+  };
+  useEffect(() => {
+    getBoxes();
+  }, []);
 
-    const getBoxes = () => {
-        ref.onSnapshot((querySnapshot) =>{
-            const boxesQuery = [];
-            querySnapshot.forEach((doc) =>{
-                boxesQuery.push(doc.data());
-            });
-            setBoxes(boxesQuery);
-        })
-    }
+  const renderItem = ({ item, index}) => {
+    return <Box box={item} navigation={navigation} />;
+  };
 
-    useEffect(()=>{
-        getBoxes()
-    },[]);
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerSection}>
+        <Text style={styles.headerUserName}>Your Boxes</Text>
+      </View>
+      <View style={styles.boxesGird}>
+        <FlatList
+          data={boxes}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          numColumns={2}
+        />
+      </View>
+    </View>
+  );
+}
 
-    return(
-        <View>
-            {boxes.map(box => (
-                <Text key={box.place}>
-                    {box.description}
-                </Text>
-            ))}
-        </View>
-        // <View><Text>XD</Text></View>
-    );
-};
-
-BoxPage.propTypes = {
-    
-}   
+BoxPage.propTypes = {};
