@@ -11,6 +11,13 @@ export default function AddBox() {
     const [listItems, setListItems] = useState([]);
     const [listItemInputValue, setlistItemInputValue] = useState('');
 
+    ref = db.collection('boxes');
+
+    useEffect(()=>{
+        setPlace("");
+        setDescription("");
+        setListItems([]);
+    },[boxes])
 
     function addSchool(newBox) {
         ref
@@ -22,9 +29,6 @@ export default function AddBox() {
           .catch((err) => {
             console.error(err);
           });
-          setPlace("");
-          setDescription("");
-          setListItems([]);
       }
 
       const handleListItemsInputChange = (e) => {
