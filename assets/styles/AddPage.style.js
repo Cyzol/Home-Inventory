@@ -13,6 +13,16 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 80,
         color: "#FFF"
     },
+    buttons: {
+        flex: 0.2,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    inputs: {
+        flex: 0.2,
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     loginInput: {
         width: 285,
         height: 50,
@@ -31,15 +41,17 @@ export const styles = StyleSheet.create({
     },
 
     loginButton: {
-        width: 170,
+        marginTop: 20,
+        width: 100,
         height: 41,
         backgroundColor: "#6C63FF",
         borderRadius: 25,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 10,
+        marginLeft: 20,
     },
     addItemButton: {
+        marginTop: 20,
         width: 120,
         height: 41,
         backgroundColor: "#6C63FF",
@@ -61,7 +73,7 @@ export const styles = StyleSheet.create({
         elevation: 6,
         borderRadius: 25,
         padding: 10,
-        marginTop: 10
+        marginTop: 50
     },
     headerNewBox: {
         width: 277,
@@ -82,6 +94,12 @@ export const styles = StyleSheet.create({
         fontStyle: "normal",
         fontWeight: "normal",
         marginBottom: 5,
+    },
+    keyboard: {
+        margin: 100,
+    },
+    scrollView: {
+        flex: 1,
     }
 
 })
