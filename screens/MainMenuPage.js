@@ -22,7 +22,6 @@ export default function MainMenuPage({ navigation }) {
     navigation.replace("Login");
   };
 
-
   return (
     <View style={styles.container}>
       <View style={styles.userNameSection}>
@@ -32,22 +31,34 @@ export default function MainMenuPage({ navigation }) {
         <Image source={require("../assets/icons/mainMenuPage.png")} />
       </View>
       <View style={styles.buttonSection}>
-        <TouchableOpacity  style={styles.mainMenuButton}>
+        <TouchableOpacity
+          style={styles.mainMenuButton}
+          onPress={() => navigation.navigate("GenerateQR")}
+        >
           <Text style={styles.buttonText}>Generate Qr</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate("BoxPage")} style={styles.mainMenuButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("BoxPage")}
+          style={styles.mainMenuButton}
+        >
           <Text style={styles.buttonText}>See all items</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate("AddBox")} style={styles.mainMenuButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("AddBox")}
+          style={styles.mainMenuButton}
+        >
           <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={()=>navigation.navigate("QrCodeScanner")} style={styles.mainMenuButton}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("QrCodeScanner")}
+          style={styles.mainMenuButton}
+        >
           <Text style={styles.buttonText}>Scan Qr</Text>
         </TouchableOpacity>
       </View>
-        <TouchableOpacity onPress={loggingOut}>
-          <Text style={{ marginBottom: 30 }}>Sign Out</Text>
-        </TouchableOpacity>
+      <TouchableOpacity onPress={loggingOut}>
+        <Text style={{ marginBottom: 30 }}>Sign Out</Text>
+      </TouchableOpacity>
     </View>
   );
 }
