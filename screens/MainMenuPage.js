@@ -32,7 +32,7 @@ export default function MainMenuPage({ navigation }) {
         <Image source={require("../assets/icons/mainMenuPage.png")} />
       </View>
       <View style={styles.buttonSection}>
-        <TouchableOpacity style={styles.mainMenuButton}>
+        <TouchableOpacity  style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Generate Qr</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={()=>navigation.navigate("BoxPage")} style={styles.mainMenuButton}>
@@ -41,7 +41,7 @@ export default function MainMenuPage({ navigation }) {
         <TouchableOpacity onPress={()=>navigation.navigate("AddBox")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.mainMenuButton}>
+        <TouchableOpacity onPress={()=>navigation.navigate("QrCodeScanner")} style={styles.mainMenuButton}>
           <Text style={styles.buttonText}>Scan Qr</Text>
         </TouchableOpacity>
       </View>

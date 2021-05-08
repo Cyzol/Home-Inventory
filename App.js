@@ -17,6 +17,8 @@ import RegisterPage from "./screens/RegisterPage";
 import BoxPage from "./screens/BoxPage";
 import AddBox from "./screens/AddBox.js";
 import BoxInfo from "./screens/BoxInfo.js";
+import QrCodeScanner from "./screens/QrCodeScanner";
+
 
 const Stack = createStackNavigator();
 
@@ -30,6 +32,7 @@ export default function App() {
         <Stack.Screen name="BoxPage" component={BoxPage} />
         <Stack.Screen name="AddBox" component={AddBox} />
         <Stack.Screen name="BoxInfo" component={BoxInfo} />
+        <Stack.Screen name="QrCodeScanner" component={QrCodeScanner} />
       </Stack.Navigator>
     </NavigationContainer>
   );
