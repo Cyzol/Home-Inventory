@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { styles } from "../assets/styles/BoxInfo.style.js";
 import { auth, db } from "../firebase";
+import QRCode from "react-native-qrcode-svg";
 
 export default function BoxInfo({ navigation, route: { params } }) {
   const ref = db
@@ -40,11 +41,12 @@ export default function BoxInfo({ navigation, route: { params } }) {
       <View contentContainerStyle={styles.scrollView}>
         <Text style={styles.titles}>Items: </Text>
         {params.listItems.map((item, index) => (
-          <View style={styles.item} >
-            <Text style={styles.text} >{item}</Text>
+          <View style={styles.item} key={item}>
+            <Text style={styles.text}>{item}</Text>
           </View>
         ))}
       </View>
+      <QRCode value={params.id} />
     </View>
   );
 }
