@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { styles } from "../assets/styles/BoxInfo.style.js";
 import { auth, db } from "../firebase";
 import QRCode from "react-native-qrcode-svg";
+import Box from "../components/Box/Box";
 
 export default function BoxInfo({ navigation, route: { params } }) {
   const ref = db
@@ -20,33 +27,43 @@ export default function BoxInfo({ navigation, route: { params } }) {
       });
   };
 
+  const renderItem = ({ item }) => {
+    return (
+      <View style={styles.item}>
+        <Text style={styles.itemText}>{item}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.loginButton} onPress={handleDeleteBox}>
-        <Text>Delete box</Text>
-      </TouchableOpacity>
-      <View style={styles.containerTitle}>
-        <Text style={styles.titles}>Place: </Text>
-        <View style={styles.place}>
-          <Text style={styles.text}>{params.place}</Text>
+      <View style={styles.infobox}>
+        <View style={styles.descriptionBox}>
+          <Text style={styles.info}>{params.description}</Text>
+          <Text style={styles.place}>{params.place}</Text>
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={handleDeleteBox}
+          >
+            <Text style={styles.deleteButtonFont}>Delete box</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.qrcode}>
+          <QRCode style={styles.qr} value={params.id} />
         </View>
       </View>
-      <View style={styles.containerTitle}>
-        <Text style={styles.titles}>Description: </Text>
-        <View style={styles.place}>
-          <Text style={styles.text}>{params.description}</Text>
+      <View style={styles.listItemsContainer}>
+        <View style={styles.itemsBox}>
+          <Text style={styles.infoBox}>Items</Text>
         </View>
+        <FlatList
+          style={styles.flatList}
+          data={params.listItems}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          numColumns={1}
+        />
       </View>
-
-      <View contentContainerStyle={styles.scrollView}>
-        <Text style={styles.titles}>Items: </Text>
-        {params.listItems.map((item, index) => (
-          <View style={styles.item} key={item}>
-            <Text style={styles.text}>{item}</Text>
-          </View>
-        ))}
-      </View>
-      <QRCode value={params.id} />
     </View>
   );
 }
