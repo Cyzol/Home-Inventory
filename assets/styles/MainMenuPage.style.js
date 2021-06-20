@@ -23,7 +23,8 @@ export const styles = StyleSheet.create({
         flex: 1.5,
     },
     buttonSection:{
-        flex: 2
+        flex: 2,
+        paddingTop: 30
     },
     mainMenuButton:{
         backgroundColor: "#6C63FF",
@@ -36,7 +37,7 @@ export const styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 6,
         borderRadius: 25,
-        marginBottom: 20,
+        marginBottom: 30,
     },
     buttonText: {
         textAlign: "center",
