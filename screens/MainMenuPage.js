@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import { styles } from "../assets/styles/MainMenuPage.style.js";
 import { auth } from "../firebase.js";
 
@@ -32,22 +26,16 @@ export default function MainMenuPage({ navigation }) {
       </View>
       <View style={styles.buttonSection}>
         <TouchableOpacity
+          onPress={() => navigation.navigate("AddBox")}
           style={styles.mainMenuButton}
-          onPress={() => navigation.navigate("GenerateQR")}
         >
-          <Text style={styles.buttonText}>Generate Qr</Text>
+          <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("BoxPage")}
           style={styles.mainMenuButton}
         >
           <Text style={styles.buttonText}>See all items</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("AddBox")}
-          style={styles.mainMenuButton}
-        >
-          <Text style={styles.buttonText}>Add new item</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("QrCodeScanner")}

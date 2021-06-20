@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   box: {
     justifyContent: "center", //Centered vertically
     alignItems: "center", // Centered horizontally
-    width: 180,
+    width: 170,
     height: 100,
     backgroundColor: "#6C63FF",
     shadowColor: "rgba(0, 0, 0, 0.25)",

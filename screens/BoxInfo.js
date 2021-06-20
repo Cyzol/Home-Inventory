@@ -9,7 +9,6 @@ import {
 import { styles } from "../assets/styles/BoxInfo.style.js";
 import { auth, db } from "../firebase";
 import QRCode from "react-native-qrcode-svg";
-import Box from "../components/Box/Box";
 
 export default function BoxInfo({ navigation, route: { params } }) {
   const ref = db
